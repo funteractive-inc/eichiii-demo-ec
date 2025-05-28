@@ -1,0 +1,47 @@
+export const sampleOrderMessageXML = `
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.040/cXML.dtd">
+<cXML payloadID="order-msg-20250321-002" timestamp="2025-03-21T16:30:00+09:00">
+  <Message>
+    <PunchOutOrderMessage>
+      <BuyerCookie>session-abc-123</BuyerCookie>
+
+      <PunchOutOrderMessageHeader operationAllowed="create">
+        <Total>
+          <Money currency="JPY">50000</Money>
+        </Total>
+      </PunchOutOrderMessageHeader>
+      <ItemIn quantity="1" lineNumber="1">
+        <ItemID>
+          <SupplierPartID>HOTEL-TOKYO-2N</SupplierPartID>
+        </ItemID>
+        <ItemDetail>
+          <UnitPrice>
+            <Money currency="JPY">28000</Money>
+          </UnitPrice>
+          <Description xml:lang="ja">ホテル東京宿泊 2泊（2025/03/30〜2025/04/01）</Description>
+          <UnitOfMeasure>EA</UnitOfMeasure>
+        </ItemDetail>
+        <Extrinsic name="ReservationNumber">HOTEL-RES-0001</Extrinsic>
+        <Extrinsic name="CheckInDate">2025-03-30</Extrinsic>
+        <Extrinsic name="CheckOutDate">2025-04-01</Extrinsic>
+      </ItemIn>
+      <ItemIn quantity="1" lineNumber="2">
+        <ItemID>
+          <SupplierPartID>SHINKANSEN-TOKYO-OSAKA</SupplierPartID>
+        </ItemID>
+        <ItemDetail>
+          <UnitPrice>
+            <Money currency="JPY">22000</Money>
+          </UnitPrice>
+          <Description xml:lang="ja">新幹線指定席（東京 → 大阪）</Description>
+          <UnitOfMeasure>EA</UnitOfMeasure>
+        </ItemDetail>
+        <Extrinsic name="ReservationNumber">TRAIN-RES-0002</Extrinsic>
+        <Extrinsic name="DepartureDate">2025-03-30</Extrinsic>
+        <Extrinsic name="SeatType">指定席</Extrinsic>
+        <Extrinsic name="TicketType">電子チケット</Extrinsic>
+      </ItemIn>
+    </PunchOutOrderMessage>
+  </Message>
+</cXML>`;
