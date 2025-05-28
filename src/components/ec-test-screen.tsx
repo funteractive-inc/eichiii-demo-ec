@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { EICHIII_API_BASE_URL } from "@/lib/env";
+import { NEXT_PUBLIC_API_BASE_URL } from "@/lib/env";
 import { sampleOrderMessageXML } from "@/lib/sample-order-message-xml";
 import { encodeXML } from "@/lib/utils";
 
@@ -14,7 +14,7 @@ export default function EcTestScreen() {
     const catalogId = "pikapaka";
 
     const form = document.createElement("form");
-    form.action = `${EICHIII_API_BASE_URL}/${catalogId}/punchout/order-message/test`;
+    form.action = `${NEXT_PUBLIC_API_BASE_URL}/${catalogId}/punchout/order-message/test`;
     form.method = "POST";
 
     const input = document.createElement("input");
