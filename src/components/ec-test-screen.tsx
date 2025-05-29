@@ -29,7 +29,6 @@ export default function EcTestScreen() {
 
   return (
     <div className="min-h-screen bg-white p-8">
-      <p>確認用: {NEXT_PUBLIC_API_BASE_URL.substring(0, 20)}</p>
       <div className="mx-auto max-w-2xl">
         <Card>
           <CardHeader>
