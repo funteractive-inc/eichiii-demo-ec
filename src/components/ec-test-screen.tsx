@@ -11,10 +11,8 @@ export default function EcTestScreen() {
   const handleOrderConfirm = () => {
     const encoded = encodeXML(sampleOrderMessageXML);
 
-    const catalogId = "pikapaka";
-
     const form = document.createElement("form");
-    form.action = `${NEXT_PUBLIC_API_BASE_URL}/${catalogId}/punchout/order-message/test`;
+    form.action = `${NEXT_PUBLIC_API_BASE_URL}/punchout/order-message/test`;
     form.method = "POST";
 
     const input = document.createElement("input");
