@@ -8,21 +8,20 @@ import { sampleOrderMessageXML } from "@/lib/sample-order-message-xml";
 import { encodeXML } from "@/lib/utils";
 
 export default function EcTestScreen() {
-  const handleOrderConfirm = () => {
+  const handleOrderConfirm = async () => {
     const encoded = encodeXML(sampleOrderMessageXML);
 
-    const form = document.createElement("form");
-    form.action = `${NEXT_PUBLIC_API_BASE_URL}/punchout/order-message/test`;
-    form.method = "POST";
-
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "cxml";
-    input.value = encoded;
-
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
+    try {
+      await fetch(`${NEXT_PUBLIC_API_BASE_URL}/punchout/order-message/test`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/xml",
+        },
+        body: encoded,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
