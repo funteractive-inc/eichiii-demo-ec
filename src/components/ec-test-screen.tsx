@@ -12,13 +12,16 @@ export default function EcTestScreen() {
     const encoded = encodeXML(sampleOrderMessageXML);
 
     try {
-      await fetch(`${NEXT_PUBLIC_API_BASE_URL}/punchout/order-message/test`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/xml",
-        },
-        body: encoded,
-      });
+      await fetch(
+        `${NEXT_PUBLIC_API_BASE_URL}/punchout/order-message?mode=test`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/xml",
+          },
+          body: encoded,
+        }
+      );
     } catch (error) {
       console.error(error);
     }
