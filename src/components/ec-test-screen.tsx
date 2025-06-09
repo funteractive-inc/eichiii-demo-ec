@@ -1,29 +1,20 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { NEXT_PUBLIC_API_BASE_URL } from "@/lib/env";
-import { sampleOrderMessageXML } from "@/lib/sample-order-message-xml";
-import { encodeXML } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { sampleOrderMessageXML } from '@/lib/sample-order-message-xml';
+import { NEXT_PUBLIC_API_BASE_URL } from '@/lib/env';
+import { encodeXML } from '@/lib/utils';
+import { useRef } from 'react';
 
 export default function EcTestScreen() {
-  const handleOrderConfirm = async () => {
-    const encoded = encodeXML(sampleOrderMessageXML);
+  const formRef = useRef<HTMLFormElement>(null);
 
-    try {
-      await fetch(
-        `${NEXT_PUBLIC_API_BASE_URL}/punchout/order-message?mode=test`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/xml",
-          },
-          body: encoded,
-        }
-      );
-    } catch (error) {
-      console.error(error);
+  const handleOrderConfirm = () => {
+    if (formRef.current) {
+      // XML文字列を hidden input にセットして submit
+      formRef.current.submit();
     }
   };
 
@@ -40,7 +31,6 @@ export default function EcTestScreen() {
             <div className="space-y-4">
               <div className="font-semibold text-lg">パッケージプラン</div>
 
-              {/* 新幹線セクション */}
               <div className="p-4 border rounded-lg bg-blue-50">
                 <div className="font-medium text-base mb-2 text-blue-800">
                   新幹線
@@ -53,7 +43,6 @@ export default function EcTestScreen() {
                 </div>
               </div>
 
-              {/* ホテルセクション */}
               <div className="p-4 border rounded-lg bg-green-50">
                 <div className="font-medium text-base mb-2 text-green-800">
                   ホテル
@@ -73,15 +62,29 @@ export default function EcTestScreen() {
               <div className="text-lg font-bold">合計: 50,000円</div>
             </div>
 
-            <div className="pt-4">
-              <Button
-                onClick={handleOrderConfirm}
-                className="w-full h-12 text-lg font-semibold"
-                size="lg"
-              >
-                注文を確定する
-              </Button>
-            </div>
+            <form
+              ref={formRef}
+              method="POST"
+              action={`${NEXT_PUBLIC_API_BASE_URL}/punchout/order-message?mode=test`}
+              encType="application/x-www-form-urlencoded"
+            >
+              <input
+                type="hidden"
+                name="cxml"
+                value={encodeXML(sampleOrderMessageXML)}
+              />
+
+              <div className="pt-4">
+                <Button
+                  type="button"
+                  onClick={handleOrderConfirm}
+                  className="w-full h-12 text-lg font-semibold"
+                  size="lg"
+                >
+                  注文を確定する
+                </Button>
+              </div>
+            </form>
           </CardContent>
         </Card>
       </div>
