@@ -81,7 +81,7 @@ export default function EcTestScreen() {
                   className="w-full h-12 text-lg font-semibold"
                   size="lg"
                 >
-                  注文を確定する
+                  承認を依頼する
                 </Button>
               </div>
             </form>
